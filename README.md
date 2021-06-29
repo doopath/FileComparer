@@ -1,0 +1,2 @@
+# FilesComparer
+Visual files comparer
