@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31423.177
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileComparer", "FilesComparer\FileComparer.csproj", "{4F89A7FD-DA29-40A0-9744-15B9B7AEF532}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileComparer", "FileComparer\FileComparer.csproj", "{4F89A7FD-DA29-40A0-9744-15B9B7AEF532}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
