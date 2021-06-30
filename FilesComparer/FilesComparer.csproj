@@ -7,8 +7,12 @@
         <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
         <StartupObject>FilesComparer.Program</StartupObject>
         <SignAssembly>true</SignAssembly>
-        <AssemblyOriginatorKeyFile>FilesComparer.snk</AssemblyOriginatorKeyFile>
         <AssemblyName>fc</AssemblyName>
+        <AssemblyOriginatorKeyFile>FilesComparer.snk</AssemblyOriginatorKeyFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
 
     <ItemGroup>
