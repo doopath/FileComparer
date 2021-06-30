@@ -21,3 +21,8 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+
+# IDEs
+.vs
+.vscode
+.idea

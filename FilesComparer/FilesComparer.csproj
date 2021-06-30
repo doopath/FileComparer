@@ -8,6 +8,7 @@
         <StartupObject>FilesComparer.Program</StartupObject>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>FilesComparer.snk</AssemblyOriginatorKeyFile>
+        <AssemblyName>fc</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
