@@ -1,7 +1,7 @@
 ﻿using System;
 using NLog;
 
-namespace FilesComparer
+namespace FileComparer
 {
     public static class Program
     {

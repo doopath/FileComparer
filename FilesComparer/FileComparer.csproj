@@ -5,10 +5,10 @@
         <TargetFramework>net5.0</TargetFramework>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-        <StartupObject>FilesComparer.Program</StartupObject>
+        <StartupObject>FileComparer.Program</StartupObject>
         <SignAssembly>true</SignAssembly>
         <AssemblyName>fc</AssemblyName>
-        <AssemblyOriginatorKeyFile>FilesComparer.snk</AssemblyOriginatorKeyFile>
+        <AssemblyOriginatorKeyFile>FileComparer.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
