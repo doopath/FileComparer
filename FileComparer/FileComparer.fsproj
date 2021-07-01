@@ -18,8 +18,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="nlog.config" />
+		<Compile Include="Colors.fs" />
+		<Compile Include="Unils.fs" />
 		<Compile Include="Comparing.fs" />
+		<Compile Include="CompareRequestBuilding.fs" />
+		<None Include="nlog.config" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 	

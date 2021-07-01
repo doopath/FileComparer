@@ -4,7 +4,7 @@ module Comparer =
     open System
     open System.IO
     open Spectre.Console
-    open System.Collections.Generic
+    open FileComparer.Utils
 
 
     let isValidPathToDirectory (path: string) = path.EndsWith("/") || path.EndsWith(@"\")
@@ -24,14 +24,6 @@ module Comparer =
 
 
     let createBarChart (width: int) (label: string) = new BarChart() |> setBarChartWidth width |> setBarChartLabel label
-
-
-    let takeFirst (l: 'a IEnumerable) =
-        let enum = l.GetEnumerator()
-
-        match enum.MoveNext() with
-        | true -> enum.Current
-        | false -> failwith "Cannot get first element of an empty IEnumerable object."
         
 
     let modifyPathToDirectory (path: string) =
@@ -44,7 +36,7 @@ module Comparer =
         (toUnixPath path).Split("/")
         |> List.ofArray
         |> List.rev
-        |> takeFirst
+        |> Util.takeFirst
 
 
     let getFilesSizes (files: string[]) =

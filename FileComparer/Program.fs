@@ -3,8 +3,7 @@
 module Main =
     open System
     open NLog
-    open Spectre.Console
-    open FileComparer.Comparing
+    open FileComparer.CompareRequestBuilding
 
 
     let consoleLogger = LogManager.GetLogger "FileComparer.Main.Cosole"
@@ -24,8 +23,8 @@ module Main =
         fileLogger.Debug "FilesComparer is starting..."
         logReceivedArguments args
 
-        let path = Console.ReadLine()
-        Comparer.compare path 100 Color.Purple3
+        let compareRequest = CompareRequestBuilder.buildCompareRequest (args |> List.ofArray)
+        compareRequest()
 
         fileLogger.Debug "FilesComparer has finished working.\n\n"
         0
