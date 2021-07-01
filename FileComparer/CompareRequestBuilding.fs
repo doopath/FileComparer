@@ -9,7 +9,7 @@ module CompareRequestBuilder =
 
     let skipItem (i: int) (l: 'a list) = l.[1+i..] |> List.append l.[..i-1]
 
-    let findArgPointerIndex (pn: 'a) (args: 'a list) = args |> List.tryFindIndex ((=) pn)
+    let findArgPointerIndex (pn: 'a ) (args: 'a list) = args |> List.tryFindIndex ((=) pn)
         
 
     let findArgWithPointer (pn: 'a) (def: 'a) (args: 'a list) =
@@ -47,20 +47,22 @@ module CompareRequestBuilder =
             (args, path)
 
 
-    let takeColor (def: string) (args: string list) =
-        args |> takeArgument "-c" def
+    let takeColor (def: string) (args: string list) = args |> takeArgument "-c" def
 
-    let takeWidth (def: string) (args: string list) =
-        args |> takeArgument "-w" def
+    let takeWidth (def: string) (args: string list) = args |> takeArgument "-w" def
+
+    let takeSizeFormat (def: string) (args: string list) = args |> takeArgument "-sf" def
 
 
     let buildCompareRequest (args: string list) =
         let pathArgsPair = args |> takePath "./"
-        let colorArgsPair = (fst pathArgsPair) |> takeColor "purple"
-        let widthArgsPair = (fst colorArgsPair) |> takeWidth "100"
+        let colorArgsPair = fst pathArgsPair |> takeColor "purple"
+        let widthArgsPair = fst colorArgsPair |> takeWidth "100"
+        let sizeformatArgsPair = fst widthArgsPair |> takeSizeFormat "bytes"
 
         let path = snd pathArgsPair
         let width = int (snd widthArgsPair)
         let color = Colors.colorsMap.[snd colorArgsPair]
+        let sizeFormat = snd sizeformatArgsPair
 
-        (fun () -> Comparer.compare path width color)
+        (fun () -> Comparer.compare path width color sizeFormat)

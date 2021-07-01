@@ -23,7 +23,7 @@ module Main =
         fileLogger.Debug "FilesComparer is starting..."
         logReceivedArguments args
 
-        let compareRequest = CompareRequestBuilder.buildCompareRequest (args |> List.ofArray)
+        let compareRequest = CompareRequestBuilder.buildCompareRequest (List.ofArray args)
         compareRequest()
 
         fileLogger.Debug "FilesComparer has finished working.\n\n"

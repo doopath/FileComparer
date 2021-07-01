@@ -7,6 +7,17 @@ module Comparer =
     open FileComparer.Utils
 
 
+    let mapBytesAs (sizeFormat: string) (number: int64) =
+        match sizeFormat.ToLower() with
+        | "bytes" -> number
+        | "kib" -> number / 1024L
+        | "mib" -> number / 1024L / 1024L
+        | "gib" -> number / 1024L / 1024L / 1024L
+        | "kb" -> number / 1000L
+        | "mb" -> number / 1000L / 1000L
+        | "gb" -> number / 1000L / 1000L / 1000L
+
+
     let isValidPathToDirectory (path: string) = path.EndsWith("/") || path.EndsWith(@"\")
 
     let toUnixPath (path: string) = path.Replace(@"\", "/")
@@ -39,11 +50,11 @@ module Comparer =
         |> Util.takeFirst
 
 
-    let getFilesSizes (files: string[]) =
+    let getFilesSizes (sizeFormat: string) (files: string[]) =
         let sizesQuery =
             query {
                 for file in files do
-                select (getFileSize file)
+                select  (file |> getFileSize |> mapBytesAs sizeFormat)
             }
 
         sizesQuery |> Seq.toArray |> Array.map (fun i -> i)
@@ -75,13 +86,13 @@ module Comparer =
     let createBarChartItem (color: Color) (name: string, value: int64) = new BarChartItem((takeFileName name), (float) value, color)
 
 
-    let compare (path: string) (width: int) (color: Color) =
+    let compare (path: string) (width: int) (color: Color) (sizeFormat: string) =
         let barChart = createBarChart width "[underline purple3 bold]Files sizes (bytes)\n[/]"
 
         requireExistingDirectory(path)
 
         let files = getFilesFrom (modifyPathToDirectory path)
-        let sizes = getFilesSizes files
+        let sizes = getFilesSizes sizeFormat files
         let entries = mergeInEntries files sizes |> List.sortBy (fun (_, s) -> -s)
         let barCharItemFactoryFunc = new Func<(string * int64), BarChartItem> (createBarChartItem color)
 
