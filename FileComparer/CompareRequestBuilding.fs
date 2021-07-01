@@ -1,10 +1,7 @@
-﻿namespace FileComparer.CompareRequestBuilding
-
-module CompareRequestBuilder =
+﻿module FileComparer.CompareRequestBuilding
     open System.IO
     open FileComparer.Utils
     open FileComparer.Comparing
-    open FileComparer.Colors
 
 
     let skipItem (i: int) (l: 'a list) = l.[1+i..] |> List.append l.[..i-1]
@@ -37,7 +34,7 @@ module CompareRequestBuilder =
         let path =
             match existingDirs.Length with
             |0 -> def
-            |_ -> Util.takeFirst existingDirs
+            |_ -> takeFirst existingDirs
 
         if args |> List.contains path then
             let selectedArgIndex = args |> List.findIndex ((=) path)
@@ -65,4 +62,4 @@ module CompareRequestBuilder =
         let color = Colors.colorsMap.[snd colorArgsPair]
         let sizeFormat = snd sizeformatArgsPair
 
-        (fun () -> Comparer.compare path width color sizeFormat)
+        (fun () -> compare path width color sizeFormat)

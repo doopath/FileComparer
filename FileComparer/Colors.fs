@@ -1,6 +1,4 @@
-﻿namespace FileComparer.Colors
-
-module Colors =
+﻿module FileComparer.Colors
     open System.Collections.Generic
     open Spectre.Console
 

@@ -1,6 +1,4 @@
-﻿namespace FileComparer.Utils
-
-module Util =
+﻿module FileComparer.Utils
     open System.Collections.Generic
 
 

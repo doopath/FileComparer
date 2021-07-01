@@ -1,6 +1,4 @@
-﻿namespace FileComparer.Comparing
-
-module Comparer =
+﻿module FileComparer.Comparing
     open System
     open System.IO
     open Spectre.Console
@@ -47,7 +45,7 @@ module Comparer =
         (toUnixPath path).Split("/")
         |> List.ofArray
         |> List.rev
-        |> Util.takeFirst
+        |> takeFirst
 
 
     let getFilesSizes (sizeFormat: string) (files: string[]) =

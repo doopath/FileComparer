@@ -1,6 +1,4 @@
-﻿namespace FileComparer
-
-module Main =
+﻿module FileComparer.Main
     open System
     open NLog
     open FileComparer.CompareRequestBuilding
@@ -23,7 +21,7 @@ module Main =
         fileLogger.Debug "FilesComparer is starting..."
         logReceivedArguments args
 
-        let compareRequest = CompareRequestBuilder.buildCompareRequest (List.ofArray args)
+        let compareRequest = buildCompareRequest (List.ofArray args)
         compareRequest()
 
         fileLogger.Debug "FilesComparer has finished working.\n\n"
