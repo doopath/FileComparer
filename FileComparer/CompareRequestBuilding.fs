@@ -29,7 +29,7 @@
             (args, arg)
 
 
-    let takePath (def: string) (args: 'a list) =
+    let takePath (def: string) (args: string list) =
         let existingDirs = args |> List.where (fun arg -> Directory.Exists (arg.ToString()))
         let path =
             match existingDirs.Length with
@@ -55,11 +55,11 @@
         let pathArgsPair = args |> takePath "./"
         let colorArgsPair = fst pathArgsPair |> takeColor "purple"
         let widthArgsPair = fst colorArgsPair |> takeWidth "100"
-        let sizeformatArgsPair = fst widthArgsPair |> takeSizeFormat "bytes"
+        let sizeFormatArgsPair = fst widthArgsPair |> takeSizeFormat "bytes"
 
         let path = snd pathArgsPair
         let width = int (snd widthArgsPair)
         let color = Colors.colorsMap.[snd colorArgsPair]
-        let sizeFormat = snd sizeformatArgsPair
+        let sizeFormat = snd sizeFormatArgsPair
 
         (fun () -> compare path width color sizeFormat)
