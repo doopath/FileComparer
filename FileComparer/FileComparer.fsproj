@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net5.0</TargetFramework>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<AssemblyName>fc</AssemblyName>
+		<Version>1.0.0.1</Version>
+		<Authors>Doopath</Authors>
+		<Company>Doopath</Company>
+		<Product>FileComparer by Doopath</Product>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/doopath/FileComparer</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/doopath/FileComparer</RepositoryUrl>
+		<PackageTags />
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<Description>FileComparer is a command-line program that helps you see your files as a diagram.</Description>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<PlatformTarget>x64</PlatformTarget>
+		<Optimize>true</Optimize>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="NLog" Version="4.7.10" />
+		<PackageReference Include="Spectre.Console" Version="0.40.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="Colors.fs" />
+		<Compile Include="Unils.fs" />
+		<Compile Include="Comparing.fs" />
+		<Compile Include="CompareRequestBuilding.fs" />
+		<None Include="..\LICENSE">
+		  <Pack>True</Pack>
+		  <PackagePath></PackagePath>
+		</None>
+		<None Include="nlog.config" />
+		<Compile Include="Program.fs" />
+	</ItemGroup>
+	
+</Project>
