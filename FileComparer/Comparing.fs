@@ -85,7 +85,7 @@
 
 
     let compare (path: string) (width: int) (color: Color) (sizeFormat: string) =
-        let barChart = createBarChart width "[underline purple3 bold]Files sizes (bytes)\n[/]"
+        let barChart = createBarChart width ("[underline " + (color.ToMarkup()) + " bold]File sizes (" + sizeFormat + ")\n[/]")
 
         requireExistingDirectory(path)
 
