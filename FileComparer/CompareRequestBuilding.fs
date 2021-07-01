@@ -33,7 +33,6 @@ module CompareRequestBuilder =
 
 
     let takePath (def: string) (args: 'a list) =
-        printfn "takePath: %A" args
         let existingDirs = args |> List.where (fun arg -> Directory.Exists (arg.ToString()))
         let path =
             match existingDirs.Length with
@@ -49,11 +48,9 @@ module CompareRequestBuilder =
 
 
     let takeColor (def: string) (args: string list) =
-        printfn "takeColor: %A" args
         args |> takeArgument "-c" def
 
     let takeWidth (def: string) (args: string list) =
-        printfn "takeWidth: %A" args
         args |> takeArgument "-w" def
 
 
@@ -61,8 +58,6 @@ module CompareRequestBuilder =
         let pathArgsPair = args |> takePath "./"
         let colorArgsPair = (fst pathArgsPair) |> takeColor "purple"
         let widthArgsPair = (fst colorArgsPair) |> takeWidth "100"
-
-        printfn "After all: %A" (fst widthArgsPair)
 
         let path = snd pathArgsPair
         let width = int (snd widthArgsPair)
