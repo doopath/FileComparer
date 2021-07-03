@@ -42,7 +42,7 @@
 	<ItemGroup>
 		<Compile Include="Exceptions.fs" />
 		<Compile Include="Colors.fs" />
-		<Compile Include="Unils.fs" />
+		<Compile Include="Utils.fs" />
 		<Compile Include="Comparing.fs" />
 		<Compile Include="CompareRequestBuilding.fs" />
 		<None Include="..\..\FilesComparer.snk">
