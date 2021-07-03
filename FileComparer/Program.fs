@@ -32,8 +32,11 @@
             let compareRequest = buildCompareRequest (List.ofArray args)
             compareRequest()
         with
-        | BadColorType exc | BadSizeFormatType exc -> logErrorEverywhere LogLevel.Error exc
-        | error -> logErrorEverywhere LogLevel.Error error
+        | UnrealConvertingException exc
+        | BadColorTypeException exc
+        | BadSizeFormatTypeException exc -> logErrorEverywhere LogLevel.Error exc
+        
+        | otherException -> logErrorEverywhere LogLevel.Error otherException
 
         fileLogger.Debug "FilesComparer has finished working.\n\n"
         0

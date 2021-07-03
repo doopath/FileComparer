@@ -1,4 +1,5 @@
 ﻿module FileComparer.Exceptions
 
-exception BadSizeFormatType of string
-exception BadColorType of string
+exception BadSizeFormatTypeException of string
+exception BadColorTypeException of string
+exception UnrealConvertingException of string

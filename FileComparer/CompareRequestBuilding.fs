@@ -1,8 +1,10 @@
 ﻿module FileComparer.CompareRequestBuilding
+    open System
     open System.IO
     open FileComparer.Utils
     open FileComparer.Comparing
     open FileComparer.Colors
+    open FileComparer.Exceptions
 
 
     let skipItem (i: int) (l: 'a list) = l.[1+i..] |> List.append l.[..i-1]
@@ -58,9 +60,14 @@
         let widthArgsPair = fst colorArgsPair |> takeWidth "100"
         let sizeFormatArgsPair = fst widthArgsPair |> takeSizeFormat "bytes"
 
-        let path = snd pathArgsPair
-        let width = int (snd widthArgsPair)
-        let color = getColor (snd colorArgsPair)
-        let sizeFormat = snd sizeFormatArgsPair
+        try
+            let path = snd pathArgsPair
+            let color = getColor (snd colorArgsPair)
+            let sizeFormat = snd sizeFormatArgsPair
+            let width = int (snd widthArgsPair)
+            
+            (fun () -> compare path width color sizeFormat)
+        with
+        | :? OverflowException as exc -> raise (UnrealConvertingException exc.Message)
+        | other -> failwith other.Message
 
-        (fun () -> compare path width color sizeFormat)

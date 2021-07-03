@@ -15,7 +15,7 @@
         | "kb" -> number / 1000L
         | "mb" -> number / 1000L / 1000L
         | "gb" -> number / 1000L / 1000L / 1000L
-        | unsupported -> raise (BadSizeFormatType $"No size format named %s{unsupported}")
+        | unsupported -> raise (BadSizeFormatTypeException $"No size format named %s{unsupported}")
 
 
     let isValidPathToDirectory (path: string) = path.EndsWith("/") || path.EndsWith(@"\")

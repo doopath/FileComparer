@@ -27,4 +27,4 @@
     let getColor key =
         match colorsMap.ContainsKey key with
         | true -> colorsMap.[key]
-        | false -> raise (BadColorType $"FileComparer does not support this color (%s{key})")
+        | false -> raise (BadColorTypeException $"FileComparer does not support this color (%s{key})")
