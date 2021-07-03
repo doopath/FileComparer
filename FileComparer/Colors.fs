@@ -1,6 +1,7 @@
 ﻿module FileComparer.Colors
     open System.Collections.Generic
     open Spectre.Console
+    open FileComparer.Exceptions
 
 
     let purple = new KeyValuePair<string, Color>("purple", Color.Purple)
@@ -21,3 +22,9 @@
         black;
         green;
     ])
+    
+    
+    let getColor key =
+        match colorsMap.ContainsKey key with
+        | true -> colorsMap.[key]
+        | false -> raise (BadColorType $"FileComparer does not support this color (%s{key})")

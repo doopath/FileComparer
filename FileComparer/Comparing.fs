@@ -3,6 +3,7 @@
     open System.IO
     open Spectre.Console
     open FileComparer.Utils
+    open FileComparer.Exceptions
 
 
     let mapBytesAs (sizeFormat: string) (number: int64) =
@@ -14,7 +15,7 @@
         | "kb" -> number / 1000L
         | "mb" -> number / 1000L / 1000L
         | "gb" -> number / 1000L / 1000L / 1000L
-        | unsupported -> failwith $"No size format named %s{unsupported}"
+        | unsupported -> raise (BadSizeFormatType $"No size format named %s{unsupported}")
 
 
     let isValidPathToDirectory (path: string) = path.EndsWith("/") || path.EndsWith(@"\")
@@ -68,8 +69,8 @@
         failIfArgumentsForInEntriesMergingAreIncorrect files sizes
         
         [|0..(files.Length-1)|]
-                |> Array.map (fun i -> (files.[i], sizes.[i]))
-                |> List.ofArray
+            |> Array.map (fun i -> (files.[i], sizes.[i]))
+            |> List.ofArray
 
     
     let requireExistingDirectory (path: string) =
@@ -86,7 +87,7 @@
 
 
     let compare (path: string) (width: int) (color: Color) (sizeFormat: string) =
-        let barChart = createBarChart width ("[underline " + (color.ToMarkup()) + " bold]File sizes (" + sizeFormat + ")\n[/]")
+        let barChart = createBarChart width $"[underline {color.ToMarkup()} bold]File sizes ({sizeFormat})\n[/]"
 
         requireExistingDirectory(path)
 

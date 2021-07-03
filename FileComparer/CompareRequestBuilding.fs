@@ -2,6 +2,7 @@
     open System.IO
     open FileComparer.Utils
     open FileComparer.Comparing
+    open FileComparer.Colors
 
 
     let skipItem (i: int) (l: 'a list) = l.[1+i..] |> List.append l.[..i-1]
@@ -59,7 +60,7 @@
 
         let path = snd pathArgsPair
         let width = int (snd widthArgsPair)
-        let color = Colors.colorsMap.[snd colorArgsPair]
+        let color = getColor (snd colorArgsPair)
         let sizeFormat = snd sizeFormatArgsPair
 
         (fun () -> compare path width color sizeFormat)

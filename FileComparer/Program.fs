@@ -2,6 +2,7 @@
     open System
     open NLog
     open FileComparer.CompareRequestBuilding
+    open FileComparer.Exceptions
 
 
     let consoleLogger = LogManager.GetLogger "FileComparer.Main.Cosole"
@@ -17,7 +18,7 @@
         fileLogger.Debug message
         
         
-    let logErrorEverywhere (level: LogLevel) (error: Exception) =
+    let logErrorEverywhere (level: LogLevel) (error: 'a) =
         fileLogger.Log(level, error)
         consoleLogger.Log(level, error)
 
@@ -31,6 +32,7 @@
             let compareRequest = buildCompareRequest (List.ofArray args)
             compareRequest()
         with
+        | BadColorType exc | BadSizeFormatType exc -> logErrorEverywhere LogLevel.Error exc
         | error -> logErrorEverywhere LogLevel.Error error
 
         fileLogger.Debug "FilesComparer has finished working.\n\n"
