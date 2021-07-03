@@ -12,7 +12,9 @@ contains "Self-contained" assemblies. That means you don't need to install .NET 
 in a build (win-x64, linux-x64, osx-x64). Also, release contains "Framework-depended" portable version, it's supported on all
 platforms supporting .NET 5.0, but it's not optimized.**
 
-![no image](https://github.com/doopath/FileComparer/)
+****
+*Default FileComparer view*
+![no image](https://raw.githubusercontent.com/doopath/FileComparer/develop/Screenshots/FileComparer.png)
 
 
 
