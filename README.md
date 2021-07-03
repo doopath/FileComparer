@@ -7,7 +7,10 @@ not awesome the you should go through a list of files and check their sizes to k
 the largest in a directory.**
 
 **FileComparer by Doopath is also a cross-platform program, so you can run it on Windows, Linux, OSX and other
-platforms supported by .NET 5.0 (and some others, because there is unoptimized portable assemblies).**
+platforms supported by .NET 5.0 (and some others, because there is unoptimized portable assemblies). Current release (v1.0.1)
+contains "Self-contained" assemblies. That means you don't need to install .NET 5.0 platform on your PC, it's already included
+in a build (win-x64, linux-x64, osx-x64). Also, release contains "Framework-depended" portable version, it's supported on all
+platforms supporting .NET 5.0, but it's not optimized.**
 
 
 ## Usage
