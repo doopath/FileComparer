@@ -57,15 +57,15 @@
                 select  (file |> getFileSize |> mapBytesAs sizeFormat)
             }
 
-        sizesQuery |> Seq.toArray |> Array.map (fun i -> i)
+        sizesQuery |> Seq.toArray |> Array.map id
 
 
-    let failIfArgumentsForInEntriesMergingAreIncorrect (files: string[]) (sizes: int64[]) =
+    let failIfArgumentsForInEntriesMergingAreIncorrect (files: string list) (sizes: int64 list) =
         if files.Length <> sizes.Length then
             failwith "Length of an array of files should be equal an array of file sizes."
 
 
-    let mergeInEntries (files: string[]) (sizes: int64[]) =
+    let mergeInEntries (files: string list) (sizes: int64 list) =
         failIfArgumentsForInEntriesMergingAreIncorrect files sizes
         
         [|0..(files.Length-1)|]
@@ -81,6 +81,22 @@
     let getFilesFrom (path: string) =
         requireExistingDirectory path
         Directory.GetFiles path
+        
+        
+    let getFileNames (width: int) (files: string list) =
+        // width is a width of the BarChart. Then the BarChart will
+        // be rendered it will be split by two columns: file names and file sizes.
+        // So, file name will have width=(BarChart's width / 2 - 1).
+        // "- 3" is length of "...".
+        let maxNameWidth = int (width / 2) - 1
+        let modifiedNameWidth = maxNameWidth - 3
+        let getFileName (file: string) =
+            if file.Length > maxNameWidth then
+                file.[..modifiedNameWidth+1] + "..."
+            else
+                file
+                
+        files |> List.map getFileName
 
 
     let createBarChartItem (color: Color) (name: string, value: int64) = new BarChartItem((takeFileName name), (float) value, color)
@@ -92,8 +108,10 @@
         requireExistingDirectory(path)
 
         let files = getFilesFrom (modifyPathToDirectory path)
-        let sizes = getFilesSizes sizeFormat files
-        let entries = mergeInEntries files sizes |> List.sortBy (fun (_, s) -> -s)
-        let barCharItemFactoryFunc = new Func<(string * int64), BarChartItem> (createBarChartItem color)
+        let sizes = getFilesSizes sizeFormat files |> List.ofArray
+        let fileNames = files |> List.ofArray |> getFileNames width
+        let entries = mergeInEntries fileNames sizes |> List.sortBy (fun (_, s) -> -s)
+        let barCharItemFactoryFunc = Func<(string * int64), BarChartItem>(createBarChartItem color)
 
         AnsiConsole.Render (barChart.AddItems(entries, barCharItemFactoryFunc))
+
