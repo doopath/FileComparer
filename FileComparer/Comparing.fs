@@ -18,11 +18,11 @@
         | unsupported -> raise (BadSizeFormatTypeException $"No size format named %s{unsupported}")
 
 
-    let isValidPathToDirectory (path: string) = path.EndsWith("/") || path.EndsWith(@"\")
+    let isValidPathToDirectory (path: string) = path.EndsWith "/"  || path.EndsWith @"\" 
 
     let toUnixPath (path: string) = path.Replace(@"\", "/")
     
-    let getFileSize (path: string) = (new FileInfo(path)).Length
+    let getFileSize (path: string) = (FileInfo path).Length
         
 
     let setBarChartWidth (width: int) (item: BarChart) =
@@ -37,7 +37,7 @@
     let createBarChart (width: int) (label: string) = new BarChart() |> setBarChartWidth width |> setBarChartLabel label
         
 
-    let modifyPathToDirectory (path: string) =
+    let modifyDirectoryPath (path: string) =
         match path.EndsWith "/" || path.EndsWith @"\" with
         | true -> toUnixPath path
         | false -> toUnixPath (path + "/")
@@ -99,15 +99,16 @@
         files |> List.map getFileName
 
 
-    let createBarChartItem (color: Color) (name: string, value: int64) = new BarChartItem((takeFileName name), (float) value, color)
+    let createBarChartItem (color: Color) (name: string, value: int64) =
+        BarChartItem((takeFileName name), (float) value, color)
 
 
     let compare (path: string) (width: int) (color: Color) (sizeFormat: string) =
         let barChart = createBarChart width $"[underline {color.ToMarkup()} bold]File sizes ({sizeFormat})\n[/]"
 
-        requireExistingDirectory(path)
+        requireExistingDirectory path
 
-        let files = getFilesFrom (modifyPathToDirectory path)
+        let files = getFilesFrom (modifyDirectoryPath path)
         let sizes = getFilesSizes sizeFormat files |> List.ofArray
         let fileNames = files |> List.ofArray |> getFileNames width
         let entries = mergeInEntries fileNames sizes |> List.sortBy (fun (_, s) -> -s)
