@@ -48,17 +48,19 @@
         |> List.ofArray
         |> List.rev
         |> takeFirst
-
-
-    let getFilesSizes (sizeFormat: string) (files: string[]) =
-        let sizesQuery =
-            query {
-                for file in files do
-                select  (file |> getFileSize |> mapBytesAs sizeFormat)
-            }
-
-        sizesQuery |> Seq.toArray |> Array.map id
-
+        
+        
+    let fileSizesQuery (sizeFormat: string) (files: string list) =
+        query {
+            for file in files do
+            select  (file |> getFileSize |> mapBytesAs sizeFormat)
+        }
+        
+        
+        
+    let getFilesSizes (sizeFormat: string) (files: string list) =
+        fileSizesQuery sizeFormat files |> List.ofSeq
+            
 
     let failIfArgumentsForInEntriesMergingAreIncorrect (files: string list) (sizes: int64 list) =
         if files.Length <> sizes.Length then
@@ -80,7 +82,7 @@
     
     let getFilesFrom (path: string) =
         requireExistingDirectory path
-        Directory.GetFiles path
+        Directory.GetFiles path |> List.ofArray
         
         
     let getFileNames (width: int) (files: string list) =
@@ -101,18 +103,30 @@
 
     let createBarChartItem (color: Color) (name: string, value: int64) =
         BarChartItem((takeFileName name), (float) value, color)
+        
+        
+    
+    let fillBarChart (entries: ('a * 'b) list) (barChartFactory: Func<('a * 'b), BarChartItem>) (barChart: BarChart) =
+        barChart.AddItems(entries, barChartFactory)
+        
+        
+    let renderBarChart message (barChart: BarChart) =
+        match barChart.Data.Count with
+        | 0 -> AnsiConsole.Markup message
+        | _ -> AnsiConsole.Render barChart
 
 
     let compare (path: string) (width: int) (color: Color) (sizeFormat: string) =
+        // This message will be shown if a target directory does not contain any files.
+        let message = $"[italic bold %s{color.ToMarkup()}]There are no files at path=%s{path}[/]"
         let barChart = createBarChart width $"[underline {color.ToMarkup()} bold]File sizes ({sizeFormat})\n[/]"
 
         requireExistingDirectory path
 
         let files = getFilesFrom (modifyDirectoryPath path)
-        let sizes = getFilesSizes sizeFormat files |> List.ofArray
-        let fileNames = files |> List.ofArray |> getFileNames width
+        let sizes = getFilesSizes sizeFormat files
+        let fileNames = getFileNames width files 
         let entries = mergeInEntries fileNames sizes |> List.sortBy (fun (_, s) -> -s)
         let barCharItemFactoryFunc = Func<(string * int64), BarChartItem>(createBarChartItem color)
 
-        AnsiConsole.Render (barChart.AddItems(entries, barCharItemFactoryFunc))
-
+        barChart |> fillBarChart entries barCharItemFactoryFunc |> renderBarChart message
