@@ -118,7 +118,7 @@
 
     let compare (path: string) (width: int) (color: Color) (sizeFormat: string) =
         // This message will be shown if a target directory does not contain any files.
-        let message = $"[italic bold %s{color.ToMarkup()}]There are no files at path=%s{path}[/]"
+        let message = $"[italic bold %s{color.ToMarkup()}]There are no files at path=%s{path}\n[/]"
         let barChart = createBarChart width $"[underline {color.ToMarkup()} bold]File sizes ({sizeFormat})\n[/]"
 
         requireExistingDirectory path
