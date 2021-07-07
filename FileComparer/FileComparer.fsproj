@@ -4,18 +4,19 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net5.0</TargetFramework>
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
 		<AssemblyName>fc</AssemblyName>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		
 		<Authors>Doopath</Authors>
 		<Company>Doopath</Company>
 		<Product>FileComparer by Doopath</Product>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<PackageProjectUrl>https://github.com/doopath/FileComparer</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/doopath/FileComparer</RepositoryUrl>
-		<NeutralLanguage>en-US</NeutralLanguage>
 		<Description>FileComparer is a command-line program that helps you see your files as a diagram.</Description>
-		<Version>1.0.2.2</Version>
+		<Version>1.0.2.3</Version>
+		
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>FileComparer.snk</AssemblyOriginatorKeyFile>
 		<PublicSign>false</PublicSign>
