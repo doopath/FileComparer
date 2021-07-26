@@ -1,8 +1,7 @@
 {
   "profiles": {
     "FileComparer": {
-      "commandName": "Project",
-      "commandLineArgs": "-w 5 C:/Users/doopa/pipec"
+      "commandName": "Project"
     }
   }
 }
