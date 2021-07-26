@@ -3,3 +3,4 @@
 exception BadSizeFormatTypeException of string
 exception BadColorTypeException of string
 exception UnrealConvertingException of string
+exception UnsupportedArgumentValueException of string

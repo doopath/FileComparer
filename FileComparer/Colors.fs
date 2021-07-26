@@ -5,30 +5,23 @@ open Spectre.Console
 open FileComparer.Exceptions
 
 
-let purple =
-    new KeyValuePair<string, Color>("purple", Color.Purple)
+let purple = KeyValuePair<string, Color>("purple", Color.Purple)
 
-let blue =
-    new KeyValuePair<string, Color>("blue", Color.Blue)
+let blue = KeyValuePair<string, Color>("blue", Color.Blue)
 
-let red =
-    KeyValuePair<string, Color>("red", Color.Red)
+let red = KeyValuePair<string, Color>("red", Color.Red)
 
-let yellow =
-    KeyValuePair<string, Color>("yellow", Color.Yellow)
+let yellow = KeyValuePair<string, Color>("yellow", Color.Yellow)
 
-let white =
-    KeyValuePair<string, Color>("white", Color.White)
+let white = KeyValuePair<string, Color>("white", Color.White)
 
-let black =
-    KeyValuePair<string, Color>("black", Color.Black)
+let black = KeyValuePair<string, Color>("black", Color.Black)
 
-let green =
-    KeyValuePair<string, Color>("green", Color.Green)
+let green = KeyValuePair<string, Color>("green", Color.Green)
 
 
 let colorsMap =
-    new Dictionary<string, Color>(
+    Dictionary<string, Color>(
         [ purple
           blue
           red

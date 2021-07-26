@@ -24,9 +24,6 @@ let takeArgument (ap: 'a) (def: 'a) (args: 'a list) =
 
     if (args |> List.contains ap) then
         let pointerIndex = (args |> findArgPointerIndex ap).Value
-
-        // After skipping an argument at index=pointerIndex next one (in the list) will get the same index.
-        // [1; (2); 3; 4] |> skipItem 1 => [1; (3); 4]
         let newArgs =
             args
             |> skipItem pointerIndex

@@ -38,7 +38,9 @@ let main args =
     with
     | UnrealConvertingException exc
     | BadColorTypeException exc
+    | UnsupportedArgumentValueException exc
     | BadSizeFormatTypeException exc -> logErrorEverywhere LogLevel.Error exc
+
 
     | otherException -> logErrorEverywhere LogLevel.Error otherException
 

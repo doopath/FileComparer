@@ -83,22 +83,27 @@ let requireExistingDirectory (path: string) =
         failwith $"A directory at path=%s{path} does not exist!"
 
 
+let requireValidBarChartWidth (width: int) =
+    if width < 10 then
+        raise (UnsupportedArgumentValueException $"You cannot set width=%d{width}, width parameter should be 10 or greater!")
+
+
 let getFilesFrom (path: string) =
     requireExistingDirectory path
     Directory.GetFiles path |> List.ofArray
 
 
+let getMaxFileNameWidth width = int (width / 2) - 1
+
+
 let getFileNames (width: int) (files: string list) =
-    // width is a width of the BarChart. Then the BarChart will
-    // be rendered it will be split by two columns: file names and file sizes.
-    // So, file name will have width=(BarChart's width / 2 - 1).
-    // "- 3" is length of "...".
-    let maxNameWidth = int (width / 2) - 1
-    let modifiedNameWidth = maxNameWidth - 3
+    let maxNameWidth = getMaxFileNameWidth width
+    let shortNameModifier = "..."
+    let modifiedNameWidth = maxNameWidth - shortNameModifier.Length
 
     let getFileName (file: string) =
         if file.Length > maxNameWidth then
-            file.[..modifiedNameWidth + 1] + "..."
+            file.[..modifiedNameWidth + 1] + shortNameModifier
         else
             file
 
@@ -107,7 +112,6 @@ let getFileNames (width: int) (files: string list) =
 
 let createBarChartItem (color: Color) (name: string, value: int64) =
     BarChartItem((takeFileName name), (float) value, color)
-
 
 
 let fillBarChart (entries: ('a * 'b) list) (barChartFactory: Func<('a * 'b), BarChartItem>) (barChart: BarChart) =
@@ -129,6 +133,7 @@ let compare (path: string) (width: int) (color: Color) (sizeFormat: string) =
         createBarChart width $"[underline {color.ToMarkup()} bold]File sizes ({sizeFormat})\n[/]"
 
     requireExistingDirectory path
+    requireValidBarChartWidth width
 
     let files = getFilesFrom (modifyDirectoryPath path)
     let sizes = getFilesSizes sizeFormat files
