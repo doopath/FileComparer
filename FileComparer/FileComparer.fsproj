@@ -1,67 +1,56 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<TargetFramework>net5.0</TargetFramework>
-		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-		<AssemblyName>fc</AssemblyName>
-		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-		<NeutralLanguage>en-US</NeutralLanguage>
-		
-		<Authors>Doopath</Authors>
-		<Company>Doopath</Company>
-		<Product>FileComparer by Doopath</Product>
-		
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<RepositoryUrl>https://github.com/doopath/FileComparer</RepositoryUrl>
-		<Description>FileComparer is a command-line program that helps you see your files as a diagram.</Description>
-		<Version>1.0.2.3</Version>
-		
-		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>FileComparer.snk</AssemblyOriginatorKeyFile>
-		<PublicSign>false</PublicSign>
-	</PropertyGroup>
-	
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<PlatformTarget>x64</PlatformTarget>
-		<Optimize>true</Optimize>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
-		<PackageReference Include="NLog" Version="4.7.10" />
-		<PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
-		<PackageReference Include="Spectre.Console" Version="0.40.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="nlog.config" CopyToOutputDirectory="Always" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Include="Exceptions.fs" />
-		<Compile Include="Colors.fs" />
-		<Compile Include="Utils.fs" />
-		<Compile Include="Comparing.fs" />
-		<Compile Include="CompareRequestBuilding.fs" />
-		<None Include="..\..\FilesComparer.snk">
-		  <Link>FilesComparer.snk</Link>
-		</None>
-		<None Include="..\LICENSE">
-		  <Pack>True</Pack>
-		</None>
-		<None Include="FileComparer.snk" />
-		<None Include="nlog.config" />
-		<Compile Include="Program.fs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Properties\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Update="FSharp.Core" Version="5.0.2" />
-	</ItemGroup>
-	
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AssemblyName>fcr</AssemblyName>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Authors>Doopath</Authors>
+    <Company>Doopath</Company>
+    <Product>FileComparer by Doopath</Product>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/doopath/FileComparer</RepositoryUrl>
+    <Description>FileComparer is a command-line program that helps you see your files as a diagram.</Description>
+    <Version>1.0.2.3</Version>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="NLog" Version="4.7.10" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
+    <PackageReference Include="Spectre.Console" Version="0.40.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="nlog.config" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="Exceptions.fs" />
+    <Compile Include="Colors.fs" />
+    <Compile Include="Utils.fs" />
+    <Compile Include="Comparing.fs" />
+    <Compile Include="CompareRequestBuilding.fs" />
+    <Compile Include="Program.fs" />
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="nlog.conf" />
+  </ItemGroup>
+  
 </Project>

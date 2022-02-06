@@ -7,7 +7,7 @@ open FileComparer.Exceptions
 
 
 let consoleLogger =
-    LogManager.GetLogger "FileComparer.Main.Cosole"
+    LogManager.GetLogger "FileComparer.Main.Console"
 
 let fileLogger =
     LogManager.GetLogger "FileComparer.Main.File"
