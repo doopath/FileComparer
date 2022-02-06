@@ -22,6 +22,9 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Profiles
+*/Properties
+
 # IDEs
 .vs
 .vscode
@@ -29,3 +32,5 @@ bld/
 
 # keys
 *.snk
+.fake
+.ionide
