@@ -24,8 +24,8 @@ platforms supporting .NET 5.0, but it's not optimized.**
 (you can set color, width, directory and size format). For example, if you want to know sizes
 of files in current directory, colorized in blue and formatted as KiBs, you should type:**
 ```shell
-fc -c blue -sf kib
-# or fc -c blue -sf kib ./
+fcr -c blue -sf kib
+# or fcr -c blue -sf kib ./
 # (if you didn't set path it's applies to current dir)
 ```
 
@@ -47,14 +47,28 @@ fc -c blue -sf kib
 
 
 ## Installation
-**To install FileComparer go to the release page and download a zip archive written with name of your platform
-(for me it's FileComparer_v_v_v_win-x64.zip). Extract this archive and move target directory somewhere
-(if you use linux it could be the /opt/ directory, or C:/Program Files/ if you use Windows 10. Next step is create a
-shortcut to the "fc" binary. I could advise create a bash script, if you use linux, containing something like:**
+**To install FileComparer go to the release page and download an archive written with name of your platform
+(for me it's FileComparer_v.v.v_linux-x64.tar.gz). Extract this archive and move target directory somewhere
+(if you use linux it could be the $HOME/.local/bin directory, or C:/Program Files/ if you use Windows. Next step is to create a
+shortcut to the "fcr" binary. I would like to recommend to create a bash script, if you use linux:**
+
+
+```bash
+# Create and open a file
+touch /usr/local/bin/fcr
+nano /usr/local/bin/fcr
+```
+
+**And put these lines in the /usr/local/bin/fcr file:**
 ```bash
 #! /usr/bin/bash
-/opt/FileComparer/fc
+$HOME/.local/bin/FileComparer/fcr
 ```
-**Name it as "fc" and put it in the /usr/bin/ directory. Also, give an execution permission for your user and start use
-FileComparer. If you use Windows create a shortcut by right-clicking at the .exe file and choose "create shortcut"
-option. Move it on your desktop or the taskbar.**
+
+**Add the permissions to allow to execute the file**
+```bash
+chmod +x /usr/local/bin/fcr
+```
+<br/>
+
+**On Windows you can just put the extracted archive in the C:/Program Files/ folder and add the path to the binary in the PATH env variable.**
