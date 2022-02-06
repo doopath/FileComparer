@@ -13,7 +13,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/doopath/FileComparer</RepositoryUrl>
     <Description>FileComparer is a command-line program that helps you see your files as a diagram.</Description>
-    <Version>1.0.2.3</Version>
+    <Version>1.0.3.0</Version>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
